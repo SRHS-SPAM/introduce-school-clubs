@@ -2,9 +2,13 @@
 
 import Br from "../_component/br";
 import { useEffect, useState } from "react";
+import Desc from "./_component/desc";
 
 interface DataType {
   result: ClubType[];
+}
+interface DictType {
+  [key: string]: string;
 }
 
 interface ClubType {
@@ -12,20 +16,14 @@ interface ClubType {
   category: string;
   simpledescription: string;
   description: string;
-  projectname: string[];
-  projectdescription: string[];
-  person: string;
-  sns: string[];
+  project: DictType[];
+  person: DictType[];
+  sns: DictType[];
   baneriamge: string;
   logoimage: string;
   photoimage: string;
   uuid: string;
 }
-
-type DictType = {
-  title: string;
-  link?: string;
-};
 
 // baneriamge: "https://introduce-club.s3.ap-northeast-2.amazonaws.com/spamintro.png";
 // category: "기능반";
@@ -61,9 +59,6 @@ export default function Page(props: any) {
   useEffect(() => {
     fun();
   }, []);
-
-  const [descDict, setDescDict] = useState<DictType[]>();
-  const [snsDict, setSnsDict] = useState<DictType[]>([{ title: "asdf" }]);
 
   return (
     <>
@@ -132,87 +127,34 @@ export default function Page(props: any) {
               ))}
             /> */}
 
-            <div className="ml-10 ">
-              <div className="h-[100px] flex items-center text-white sm:text-xl text-3xl font-normal font-sans">
-                프로젝트
-              </div>
-              <div className="sm:m-10 m-16">
-                <div className="flex text-white sm:text-[20px] text-[25px] font-normal font-sans mr-[15px] sm:mr-[5px]">
-                  <div>
-                    {data?.projectname.map((ai, i) => (
-                      <div
-                        className="flex-1 sm:w-[150px] text-nowrap mb-[10px] sm:mr-[20px] mr-[30px]"
-                        key={i}
-                      >
-                        {ai}
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    {data?.projectdescription.map((ai, i) => (
-                      <div key={i} className="flex-1 sm:w-[150px] mb-[10px]">
-                        {ai}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Desc
+              title={"프로젝트"}
+              data={data?.project}
+              headKey={"projectdescription"}
+              footKey={"projectname"}
+            />
 
             <div className="my-[50px]">
               <Br />
             </div>
 
-            <div className="ml-10">
-              <div className="h-[70px] flex items-center text-white  sm:text-xl text-3xl font-normal font-sans">
-                동아리 인원
-              </div>
-              <div className="m-15 sm:m-16">
-                <div className="text-white text-[25px] font-normal mb-[50px]">
-                  {data?.person}
-                </div>
-              </div>
-            </div>
+            <Desc
+              title={"동아리 인원"}
+              data={data?.person}
+              headKey={"type"}
+              footKey={"name"}
+            />
 
             <div className="my-[50px]">
               <Br />
             </div>
-            <div className="ml-10">
-              <div className="h-[70px] flex items-center text-white sm:text-xl text-3xl font-normal font-sans">
-                동아리 SNS
-              </div>
-              <div className="m-15 sm:m-16">
-                <div className="flex text-white sm:text-[20px] text-[25px] font-normal font-sans mr-[15px] sm:flex-col">
-                  <div>
-                    {data?.sns.map((ai, i) => (
-                      <div
-                        className="flex-1 w-[300px] text-nowrap mb-[10px]"
-                        key={i}
-                      >
-                        {ai}
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    {data?.sns.map((ai, i) => (
-                      <div key={i} className="flex-1 mb-[10px]">
-                        {ai}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <Desc
-              title="동아리 SNS"
-              dom={
-                <>
-                  {snsDict.map((ai, i) => (
-                    <DescText title={ai.title} key={i}></DescText>
-                  ))}
-                </>
-              }
-            /> */}
+            <Desc
+              title={"동아리 SNS"}
+              data={data?.sns}
+              headKey={"name"}
+              footKey={"link"}
+            />
+
             <div className="my-[50px]"></div>
           </div>
         </div>

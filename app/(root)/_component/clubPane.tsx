@@ -6,15 +6,18 @@ interface ClubPaneProps {
   list: ClubType[];
 }
 
+interface DictType {
+  [key: string]: string;
+}
+
 type ClubType = {
   Name: string;
   Category: string;
   SimpleDescription: string;
   Description: string;
-  ProjectName: string[];
-  ProjectDescription: string[];
-  Person: string;
-  Sns: string[];
+  project: DictType[];
+  Person: DictType[];
+  Sns: DictType[];
   BanerIamge: string;
   LogoImage: string;
   PhotoImage: string;
@@ -39,8 +42,7 @@ const ClubPane = ({ category, list }: ClubPaneProps) => {
             Name={club.Name}
             Person={club.Person}
             PhotoImage={club.PhotoImage}
-            ProjectDescription={club.ProjectDescription}
-            ProjectName={club.ProjectName}
+            project={club.project}
             SimpleDescription={club.SimpleDescription}
             Sns={club.Sns}
             Uuid={club.Uuid}

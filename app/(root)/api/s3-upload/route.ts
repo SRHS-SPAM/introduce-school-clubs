@@ -1,4 +1,4 @@
-import { S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 
 const s3Client = new S3Client({
@@ -11,23 +11,34 @@ const s3Client = new S3Client({
 
 async function uploadFileToS3(file: Buffer, fileName: any) {
   const fileBuffer = file;
-  console.log(fileName);
+
+  const params = {
+    Bucket: process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME,
+    Key: `${fileName}`,
+    Body: fileBuffer,
+    ContentType: "image/jpg",
+  };
+
+  const command = new PutObjectCommand(params);
+  await s3Client.send(command);
+  return fileName;
 }
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
-    const formData = (await request.formData()) as any;
-    const file = formData.get("file");
+    const formData = await request.formData();
+
+    const file: any = formData.get("file");
 
     if (!file) {
-      return NextResponse.json({ error: "file is required." }, { status: 400 });
+      return NextResponse.json({ error: "File is required." }, { status: 400 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
     const fileName = await uploadFileToS3(buffer, file.name);
 
-    return NextResponse.json({ succes: true, fileName });
+    return NextResponse.json({ success: true, fileName });
   } catch (error) {
-    return NextResponse.json({ error: "Error uploading file" });
+    return NextResponse.json({ error });
   }
 }
