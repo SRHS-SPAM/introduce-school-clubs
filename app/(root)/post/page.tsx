@@ -35,6 +35,12 @@ type SubmitType = {
 export default function Page() {
   const router = useRouter();
 
+  const [inputs, setInputs] = useState({
+    name: "",
+    description: "",
+    simple_description: "",
+  });
+  const [file, setFile] = useState<File[]>([]);
   const [person, setPerson] = useState<DictType[]>([
     {
       type: "",
@@ -45,10 +51,15 @@ export default function Page() {
   const [sns, setSns] = useState<DictType[]>([{ name: "", link: "" }]);
   const [clubType, setClubType] = useState(0);
 
-  const [inti, setInti] = useState<number[] | undefined>();
-  const [wrapTempPreImage, setWrapTempPreImage] = useState<
-    File[] | undefined
-  >();
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+
+    const nextInputs = {
+      ...inputs,
+      [id]: value,
+    };
+    setInputs(nextInputs);
+  };
 
   const handleType = (d: number) => {
     setClubType((clubType + d + 3) % 3);
@@ -73,125 +84,48 @@ export default function Page() {
     //   return;
     // }
 
-    const body: SubmitType = {
-      name: e.currentTarget.clubName.value,
-      category: clubTypeName[clubType],
-      description: e.currentTarget.description.value,
-      person: person,
-      simpledescription: e.currentTarget.simple_description.value,
-      project: prjt,
-      sns: sns,
-      baner_image:
-        "https://introduce-club.s3.ap-northeast-2.amazonaws.com/spamintro.png",
-      logo_image:
-        "https://introduce-club.s3.ap-northeast-2.amazonaws.com/spamlogo.png",
-      photo_image:
-        "https://introduce-club.s3.ap-northeast-2.amazonaws.com/spambanner.png",
-    };
+    const files: string[] = ["", "", ""];
+    const uploadPromises = files.map(async (element, i) => {
+      const formData = new FormData();
+      formData.append("file", file[i]);
 
-    console.log(body);
+      const res = await fetch("/api/s3-upload", {
+        method: "POST",
+        body: formData,
+      }).then((r) => r.json());
+      const fileName = encodeURIComponent(res.fileName);
+      return `https://introduce-club.s3.ap-northeast-2.amazonaws.com/${fileName}`;
+    });
 
-    // const formData = new FormData();
-    // let formimagenameName = ["photo", "logo", "baner"];
-    // Array.from(wrapTempPreImage).forEach((ai, i) => {
-    //   formData.append(formimagenameName[i], ai);
-    // });
+    try {
+      const uploadedFiles = await Promise.all(uploadPromises);
 
-    // [
-    //   "name",
-    //   "simple_description",
-    //   "description",
-    //   "project_name",
-    //   "project_description",
-    //   "person",
-    //   "sns",
-    // ].forEach((ai) => {
-    //   formData.delete(ai);
-    // });
+      const body: SubmitType = {
+        name: inputs.name,
+        category: clubTypeName[clubType],
+        description: inputs.description,
+        person: person,
+        simpledescription: inputs.simple_description,
+        project: prjt,
+        sns: sns,
+        baner_image: uploadedFiles[0],
+        logo_image: uploadedFiles[1],
+        photo_image: uploadedFiles[2],
+      };
 
-    // //여기부터
-    // let project_name = [prjt[0].headtext];
-    // for (let i = 1; i < prjt.length; i++) {
-    //   project_name.push(prjt[i].headtext);
-    // }
+      const res = await fetch("/backend/post", {
+        method: "POST",
+        body: JSON.stringify(body),
+      }).then((res) => res.json());
+    } catch (error) {
+      console.error(error);
+    }
 
-    // let project_description = [prjt[0].foottext];
-    // for (let i = 1; i < prjt.length; i++) {
-    //   project_description.push(prjt[i].foottext);
-    // }
-    // let modal_project_description = [""];
-    // for (let i = 1; i < prjt.length; i++) {
-    //   modal_project_description.push("");
-    // }
-    // const temp_project_description =
-    //   project_description === undefined
-    //     ? modal_project_description
-    //     : project_description;
-
-    // let tempsns = [sns[0].headtext];
-    // for (let i = 1; i < sns.length; i++) {
-    //   tempsns.push(sns[i].headtext);
-    // }
-
-    // if (project_name === undefined) {
-    //   alert(
-    //     "제출 중 오류가 발생했어요!; 프로젝트 이름이 빠져있어요!(그냥 .만 찍어도 좋아요!)"
-    //   );
-    //   return;
-    // }
-    // if (project_description === undefined) {
-    //   alert(
-    //     "제출 중 오류가 발생했어요!; 프로젝트 설명이 빠져있어요!(그냥 .만 찍어도 좋아요!)"
-    //   );
-    //   return;
-    // }
-    // if (tempsns === undefined) {
-    //   alert(
-    //     "제출 중 오류가 발생했어요!; sns가 빠져있어요!(그냥 .만 찍어도 좋아요!)"
-    //   );
-    //   return;
-    // }
-    // let willbesubmittotext: SubmitType = {
-    //   name: clubname,
-    //   category: clubTypeName[clubType],
-    //   simple_description: simpDesc,
-    //   description: desc,
-    //   // person: person,
-    //   project_name: project_name,
-    //   // @ts-ignore //<--이거 꼭 필요함
-    //   project_description: temp_project_description,
-    //   sns: tempsns,
-    // };
-
-    /*for(let [key, value] of formData.entries()){
-      console.log(key, value);
-    } 
-    console.log(willbesubmittotext)*/
-    //확인 용도
-
-    // try {
-    //   const response = await axios.post("/backend/image", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //     transformRequest: [
-    //       function () {
-    //         return formData;
-    //       },
-    //     ],
-    //   });
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // try {
-    //   const res = await fetch("/backend/post", {
-    //     method: "POST",
-    //     body: JSON.stringify(willbesubmittotext),
-    //   }).then((res) => res.json());
-    //   router.push("../");
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      router.push("../");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -206,12 +140,9 @@ export default function Page() {
             alttext="업로드된 배너 이미지"
             title="이미지 선택"
             className="w-[1200px] h-[250px]"
-            name="baner"
+            setFile={setFile}
             i={0}
-            wrapI={inti}
-            setWrapTempPreImage={setWrapTempPreImage}
-            wrapTempPreImage={wrapTempPreImage}
-            setWrapI={setInti}
+            name="banner"
           />
 
           <div className="flex mt-[100px] items-center w-[1093px]">
@@ -219,16 +150,15 @@ export default function Page() {
               alttext="업로드된 로고 이미지"
               title="로고"
               className="w-[100px] h-[100px]"
-              name="logo"
-              setWrapTempPreImage={setWrapTempPreImage}
-              wrapTempPreImage={wrapTempPreImage}
               i={1}
-              wrapI={inti}
-              setWrapI={setInti}
+              setFile={setFile}
+              name="logo"
             />
             <input
               type="text"
-              id="clubName"
+              id="name"
+              value={inputs.name}
+              onChange={onChange}
               required
               placeholder="동아리 이름 입력"
               className="bg-transparent w-[322px] outline-none ml-8 text-white placeholder:text-white text-[40px] font-normal font-sans "
@@ -265,18 +195,17 @@ export default function Page() {
                 alttext="업로드된 소개 이미지"
                 className="w-[400px] h-[300px]"
                 title="이미지 선택"
-                wrapI={inti}
-                setWrapI={setInti}
-                name="photo"
-                setWrapTempPreImage={setWrapTempPreImage}
-                wrapTempPreImage={wrapTempPreImage}
                 i={2}
+                setFile={setFile}
+                name="main_image"
               />
 
               <TextArea
                 placeholder="간단한 소개를 입력해주세요."
                 id="simple_description"
                 className="w-full h-full"
+                value={inputs.simple_description}
+                onChange={onChange}
               />
             </div>
           </div>
@@ -286,6 +215,8 @@ export default function Page() {
             placeholder="동아리 설명을 입력해주세요."
             id="description"
             className="w-[1093px] min-h-[220px]"
+            value={inputs.description}
+            onChange={onChange}
           />
           <Br className="mt-[25px] mb-[35px]" />
           <Desc

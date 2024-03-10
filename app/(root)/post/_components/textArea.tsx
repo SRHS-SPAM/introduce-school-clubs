@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
 
 type DictType = {
   headtext?: string;
@@ -9,9 +9,17 @@ interface TextAreaProps {
   placeholder: string;
   id: string;
   className?: string | undefined;
+  value: string;
+  onChange: any;
 }
 
-const TextArea = ({ id, placeholder, className }: TextAreaProps) => {
+const TextArea = ({
+  id,
+  placeholder,
+  className,
+  value,
+  onChange,
+}: TextAreaProps) => {
   return (
     <textarea
       className={
@@ -21,6 +29,8 @@ const TextArea = ({ id, placeholder, className }: TextAreaProps) => {
       placeholder={placeholder}
       required
       id={id}
+      value={value}
+      onChange={onChange}
     />
   );
 };
