@@ -1,0 +1,17 @@
+@media (max-width: 640px) {
+  .caption {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .club-wrapper {
+    display: none;
+  }
+}
+
+@media (max-width: 1400px) {
+  .Search {
+    display: none;
+  }
+}
