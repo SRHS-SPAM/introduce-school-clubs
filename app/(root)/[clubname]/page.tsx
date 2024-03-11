@@ -130,8 +130,8 @@ export default function Page(props: any) {
             <Desc
               title={"프로젝트"}
               data={data?.project}
-              headKey={"projectdescription"}
-              footKey={"projectname"}
+              headKey={"projectname"}
+              footKey={"projectdescription"}
             />
 
             <div className="my-[50px]">

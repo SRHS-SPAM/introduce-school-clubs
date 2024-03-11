@@ -28,7 +28,7 @@ const Desc = ({
                 {ai[headKey]}
               </div>
               {footKey === "link" ? (
-                <Link href={ai[footKey]}>
+                <Link href={ai[footKey]} className="flex flex-1 text-[#459AFF]">
                   <div className="flex-1 mb-[10px]">{ai[footKey]}</div>
                 </Link>
               ) : (
