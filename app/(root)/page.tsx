@@ -9,15 +9,18 @@ type DataType = {
   results: ClubType[];
 };
 
+interface DictType {
+  [key: string]: string;
+}
+
 type ClubType = {
   Name: string;
   Category: string;
   SimpleDescription: string;
   Description: string;
-  ProjectName: string[];
-  ProjectDescription: string[];
-  Person: string;
-  Sns: string[];
+  project: DictType[];
+  Person: DictType[];
+  Sns: DictType[];
   BanerIamge: string;
   LogoImage: string;
   PhotoImage: string;
