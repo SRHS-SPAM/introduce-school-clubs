@@ -27,15 +27,13 @@ export default function Header() {
           <Link href="/">홈</Link>
         </div>
         <div className="font-sans w-20 h-[53px] flex items-center justify-center text-center text-white  font-normal mx-auto ">
-          <Link href="https://www.youtube.com/@seoul_robot_school">동아리</Link>
+          <Link href="https://srobot.sen.hs.kr/">홈페이지</Link>
         </div>
         <div className="font-sans w-20 h-[53px] flex items-center justify-center text-center text-white  font-normal mx-auto ">
           <Link href="https://www.speedat.site/">스피닷</Link>
         </div>
         <div className="font-sans w-30 h-[53px] flex items-center justify-center text-center text-white font-normal  mx-auto ">
-          <Link href="https://www.youtube.com/@seoul_robot_school">
-            서로위키
-          </Link>
+          <Link href="https://www.seorowiki.com">서로위키</Link>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const Club = ({
   Uuid,
 }: ClubProps) => {
   return (
-    <div className="font-sans space-x-4 flex-1 sm:w-full sm:h-[300px] w-[270px] h-[390px] bg-neutral-700 rounded-xl pt-5 sm:relative">
+    <div className="font-sans space-x-4 flex-1 sm:w-full sm:h-[300px] w-[270px] h-[390px] bg-neutral-700 rounded-xl pt-5 relative">
       <div className="w-full h-full flex flex-col gap-y-2">
         <div className="flex items-center sm:ml-4 ml-8 gap-3 sm:mb-2">
           <div className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-[15px] bg-zinc-300 overflow-clip flex items-center">
@@ -64,11 +64,11 @@ const Club = ({
           </div>
           <ClubText description={Description} title="소개" />
 
-          {Person ? <ClubText description={Person[0].name} title="인원" /> : ""}
+          {/* {Person ? <ClubText description={Person[0].name} title="인원" /> : ""} */}
         </div>
       </div>
       <Link
-        className="absolute right-3 bottom-[9px] text-white text-opacity-50 font-medium text-sm sm:text-lg  font-sans"
+        className="absolute right-3 bottom-[9px] text-white text-opacity-50 font-medium text-sm sm:text-lg font-sans"
         href={Uuid}
       >
         동아리 보러가기
