@@ -14,7 +14,7 @@ const config = {
       roboto: ["var(--roboto-font)"], // fonts.ts에서 variable로 설정한 CSS 변수를 불러와 적용합니다.
     },
     screens: {
-      sm: { max: "375px" },
+      sm: { max: "640px" },
       md: { min: "641px", max: "768px" },
       lg: { min: "769px", max: "1023px" },
       xl: { min: "1024px", max: "1280px" },
