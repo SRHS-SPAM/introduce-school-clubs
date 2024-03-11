@@ -80,10 +80,10 @@ export default function Page(props: any) {
                   className="rounded-2xl"
                 />
               </div>
-              <div className="sm:ml-8 ml-14 justify-center text-center text-white sm:text-[25px] text-[40px] font-normal">
+              <div className="sm:ml-8 ml-14 justify-center text-center whitespace-nowrap text-white sm:text-[25px] text-[40px] font-normal">
                 {data ? <>{data.name}</> : "SPAM"}
               </div>
-              <div className="ml-auto mr-10 w-[120px] text-center text-white sm:text-xl text-2xl font-normal">
+              <div className="ml-auto mr-10 w-[120px] text-center whitespace-nowrap text-white sm:text-base sm:ml-4 sm:mr-0 text-2xl font-normal">
                 {data ? <>{data.category}</> : "자율동아리"}
               </div>
             </div>

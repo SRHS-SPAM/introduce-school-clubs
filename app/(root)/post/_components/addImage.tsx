@@ -100,7 +100,7 @@ const AddImage = ({
 
   return (
     <>
-      <label htmlFor={name}>
+      <label className="sm:w-full sm:flex sm:justify-center" htmlFor={name}>
         <div
           className={cn(
             "rounded-xl overflow-clip bg-neutral-700 flex items-center justify-center cursor-pointer",

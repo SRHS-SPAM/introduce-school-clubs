@@ -129,8 +129,8 @@ export default function Page() {
   };
 
   return (
-    <div className="mt-[60px] flex flex-col items-center bg-black">
-      <div className="w-100% mt-[100px]">
+    <div className="mt-[60px] flex flex-col items-center bg-black w-full">
+      <div className="w-[1200px] sm:w-full mt-[100px] sm:px-3">
         <form
           encType="multipart/form-data"
           onSubmit={handleSubmit}
@@ -139,17 +139,17 @@ export default function Page() {
           <AddImage
             alttext="업로드된 배너 이미지"
             title="이미지 선택"
-            className="w-[1200px] h-[250px]"
+            className="w-[1200px] h-[250px] sm:w-full"
             setFile={setFile}
             i={0}
             name="banner"
           />
 
-          <div className="flex mt-[100px] items-center w-[1093px]">
+          <div className="flex mt-[100px] items-center w-[1093px] sm:w-[300px] sm:flex-wrap sm:gap-4">
             <AddImage
               alttext="업로드된 로고 이미지"
               title="로고"
-              className="w-[100px] h-[100px]"
+              className="w-[100px] h-[100px] sm:w-[90px] sm:mx-0 sm:h-[90px]"
               i={1}
               setFile={setFile}
               name="logo"
@@ -161,9 +161,9 @@ export default function Page() {
               onChange={onChange}
               required
               placeholder="동아리 이름 입력"
-              className="bg-transparent w-[322px] outline-none ml-8 text-white placeholder:text-white text-[40px] font-normal font-sans "
+              className="bg-transparent sm:w-full sm:text-center outline-none ml-8 sm:ml-0 text-white placeholder:text-white text-[40px] sm:text-[25px] font-normal font-sans"
             />
-            <div className="ml-auto w-[243px] flex items-center justify-between">
+            <div className="ml-auto sm:ml-0 sm:justify-center sm:w-full flex items-center justify-between">
               <div>
                 <ChevronLeft
                   className="text-white cursor-pointer"
@@ -189,11 +189,11 @@ export default function Page() {
 
           <Br className="my-[50px]" />
 
-          <div className="px-10 w-full flex justify-center">
-            <div className="flex gap-10 w-full">
+          <div className="px-10 w-full sm:px-0 flex justify-center">
+            <div className="flex sm:flex-col sm:items-center gap-10 w-full">
               <AddImage
                 alttext="업로드된 소개 이미지"
-                className="w-[400px] h-[300px]"
+                className="w-[400px] h-[300px] sm:h-[250px]"
                 title="이미지 선택"
                 i={2}
                 setFile={setFile}
@@ -203,7 +203,7 @@ export default function Page() {
               <TextArea
                 placeholder="간단한 소개를 입력해주세요."
                 id="simple_description"
-                className="w-full h-full"
+                className="w-full h-full sm:h-44"
                 value={inputs.simple_description}
                 onChange={onChange}
               />
@@ -214,7 +214,7 @@ export default function Page() {
           <TextArea
             placeholder="동아리 설명을 입력해주세요."
             id="description"
-            className="w-[1093px] min-h-[220px]"
+            className="w-[1093px] h-[220px] sm:w-full"
             value={inputs.description}
             onChange={onChange}
           />

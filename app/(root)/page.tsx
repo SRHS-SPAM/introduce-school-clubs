@@ -53,7 +53,7 @@ export default function Home() {
       </div>
 
       <div className="flex w-[1000px]  2xl:ml-[100px] xl:ml-[0px]">
-        <div className="flex-1 flex sm:mx-4 mt-40 flex-col   bg-black items-center">
+        <div className="flex-1 flex sm:mx-4 mt-40 flex-col bg-black items-center">
           {featureData &&
             featureData.results !== undefined &&
             (nowCategory === 0 || nowCategory === 1) && (

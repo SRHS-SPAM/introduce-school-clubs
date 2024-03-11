@@ -15,7 +15,7 @@ const noto_sans_kr = Noto_Sans_KR({
 export default function Header() {
   return (
     <div
-      className="w-full h-20  bg-neutral-700 inline-flex justify-center items-center"
+      className="w-full h-20 sm:w-screen bg-neutral-700 inline-flex justify-center items-center"
       style={{ position: "fixed", top: "0" }}
     >
       <div
@@ -30,7 +30,7 @@ export default function Header() {
           <Link href="https://www.youtube.com/@seoul_robot_school">동아리</Link>
         </div>
         <div className="font-sans w-20 h-[53px] flex items-center justify-center text-center text-white  font-normal mx-auto ">
-          <Link href="https://www.youtube.com/@seoul_robot_school">스피닷</Link>
+          <Link href="https://www.speedat.site/">스피닷</Link>
         </div>
         <div className="font-sans w-30 h-[53px] flex items-center justify-center text-center text-white font-normal  mx-auto ">
           <Link href="https://www.youtube.com/@seoul_robot_school">

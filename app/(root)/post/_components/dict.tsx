@@ -52,13 +52,13 @@ const Dict = ({
     );
   };
   return (
-    <div className={`flex w-[1093px] gap-4`}>
+    <div className={`flex w-[1093px] sm:w-full sm:flex-col gap-4`}>
       <input
         type="text"
         placeholder={headplaceholder}
         required
         onChange={handleHeadChange}
-        className={`h-24 p-5 text-white w-60 text-opacity-50 text-3xl font-normal placeholder:text-center bg-neutral-700 rounded-[15px]`}
+        className={`h-24 p-5 text-white w-60 sm:flex-1 sm:w-auto placeholder:text-opacity-50 text-3xl font-normal placeholder:text-center bg-neutral-700 rounded-[15px]`}
       />
 
       <input
@@ -66,7 +66,7 @@ const Dict = ({
         type="text"
         onChange={handleFootChange}
         placeholder={footplaceholder}
-        className="flex-1 h-24 p-5 pl-12 text-white text-opacity-50 text-3xl font-normal bg-neutral-700 rounded-[15px]"
+        className="flex-1 h-24 p-5 pl-12 sm:text-center sm:p-0 sm:py-5 text-white placeholder:text-opacity-50 text-3xl font-normal bg-neutral-700 rounded-[15px]"
       />
     </div>
   );

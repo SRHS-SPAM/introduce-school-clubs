@@ -35,8 +35,8 @@ const Desc = ({
   };
 
   return (
-    <div className="flex flex-col w-[1093px]">
-      <div className="h-[70px] text-white text-3xl font-normal font-sans">
+    <div className="flex flex-col w-[1093px] sm:w-full">
+      <div className="h-[70px] text-white text-3xl font-normal sm:text-center font-sans">
         {title}
       </div>
       <div className="flex flex-col gap-5">
@@ -54,14 +54,14 @@ const Desc = ({
         ))}
         <div className="flex w-full gap-5">
           <div
-            className="flex-1 h-24 bg-neutral-700 rounded-[15px] text-white flex items-center justify-center cursor-pointer"
+            className="flex-1 h-24 sm:h-16 bg-neutral-700 rounded-[15px] text-white flex items-center justify-center cursor-pointer"
             onClick={handlePlus}
           >
             <Plus size={40} />
           </div>
           {data.length > 1 && (
             <div
-              className="w-1/5 h-24 bg-neutral-700 rounded-[15px] text-white flex items-center justify-center cursor-pointer"
+              className="w-1/5 h-24 sm:h-16 bg-neutral-700 rounded-[15px] text-white flex items-center justify-center cursor-pointer"
               onClick={handleMinus}
             >
               <MinusIcon size={40} />
