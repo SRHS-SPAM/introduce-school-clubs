@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface DictType {
   [key: string]: string;
 }
@@ -25,8 +27,13 @@ const Desc = ({
               <div className="flex-1 w-[300px] text-nowrap mb-[10px]">
                 {ai[headKey]}
               </div>
-
-              <div className="flex-1 mb-[10px]">{ai[footKey]}</div>
+              {footKey === "link" ? (
+                <Link href={ai[footKey]}>
+                  <div className="flex-1 mb-[10px]">{ai[footKey]}</div>
+                </Link>
+              ) : (
+                <div className="flex-1 mb-[10px]">{ai[footKey]}</div>
+              )}
             </div>
           ))}
         </div>
