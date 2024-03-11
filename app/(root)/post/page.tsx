@@ -50,6 +50,7 @@ export default function Page() {
   const [prjt, setPrjt] = useState<DictType[]>([{ name: "", description: "" }]);
   const [sns, setSns] = useState<DictType[]>([{ name: "", link: "" }]);
   const [clubType, setClubType] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -83,6 +84,8 @@ export default function Page() {
     //   );
     //   return;
     // }
+
+    setIsLoading(() => true);
 
     const files: string[] = ["", "", ""];
     const uploadPromises = files.map(async (element, i) => {
@@ -125,6 +128,7 @@ export default function Page() {
       router.push("../");
     } catch (error) {
       console.error(error);
+      setIsLoading(() => false);
     }
   };
 
@@ -253,13 +257,24 @@ export default function Page() {
             data={sns}
           />
           <Br className="mt-[28px] mb-[28px]" />
-          <button
-            type="submit"
-            className="flex items-center bg-neutral-700 justify-center mb-[170px] h-24 w-full rounded-[15px]"
-          >
-            <Check className="text-white" size={36} />
-            <span className="text-white text-3xl ml-3">작성 완료</span>
-          </button>
+          {isLoading ? (
+            <button
+              disabled
+              type="submit"
+              className="flex items-center bg-neutral-700 justify-center mb-[170px] h-24 w-full rounded-[15px]"
+            >
+              <Check className="text-white" size={36} />
+              <span className="text-white text-3xl ml-3">작성 완료</span>
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="flex items-center bg-neutral-700 justify-center mb-[170px] h-24 w-full rounded-[15px]"
+            >
+              <Check className="text-white" size={36} />
+              <span className="text-white text-3xl ml-3">작성 완료</span>
+            </button>
+          )}
         </form>
       </div>
     </div>
