@@ -5,15 +5,18 @@ import asf from "./spambanner.png";
 import Link from "next/link";
 import ClubText from "./clubText";
 
+interface DictType {
+  [key: string]: string;
+}
+
 interface ClubProps {
   Name: string;
   Category: string;
   SimpleDescription: string;
   Description: string;
-  ProjectName: string[];
-  ProjectDescription: string[];
-  Person: string;
-  Sns: string[];
+  project: DictType[];
+  Person: DictType[];
+  Sns: DictType[];
   BanerIamge: string;
   LogoImage: string;
   PhotoImage: string;
@@ -28,8 +31,7 @@ const Club = ({
   Name,
   Person,
   PhotoImage,
-  ProjectDescription,
-  ProjectName,
+  project,
   SimpleDescription,
   Sns,
   Uuid,
@@ -62,10 +64,11 @@ const Club = ({
         </div>
         <div className="club-wrapper">
           <div className="h-20">
-            <ClubText caption={SimpleDescription} title="설립 목적" />
+            <ClubText description={SimpleDescription} title="설립 목적" />
           </div>
-          <ClubText caption={Description} title="소개" />
-          <ClubText caption={Person} title="인원" />
+          <ClubText description={Description} title="소개" />
+
+          {Person ? <ClubText description={Person[0].name} title="인원" /> : ""}
         </div>
       </div>
       <Link

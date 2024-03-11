@@ -3,14 +3,16 @@ import "./ClubText.css";
 
 interface ClubTextProps {
   title: string;
-  caption: string;
+  description: string;
 }
 
-const ClubText = ({ title, caption }: ClubTextProps) => {
+const ClubText = ({ title, description }: ClubTextProps) => {
   const truncatedTitle =
     title.length > 30 ? `${title.substring(0, 30)}...` : title;
   const truncatedCaption =
-    caption.length > 20 ? `${caption.substring(0, 20)}...` : caption;
+    description.length > 20
+      ? `${description.substring(0, 20)}...`
+      : description;
 
   return (
     <div className="mx-9 flex text-white text-[13px]">
